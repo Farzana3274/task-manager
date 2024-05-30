@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    {% if messages %}
+    <div class="mt-3">
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Task Detail</h1>
+        <table class="table table-bordered shadow-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th colspan="2" class="text-center">Task Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Title</th>
+                    <td>{{ task.title }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Description</th>
+                    <td>{{ task.description }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Due Date</th>
+                    <td>{{ task.due_date }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Status</th>
+                    <td>{{ task.get_status_display }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">priority</th>
+                    <td>{{ task.get_priority_display }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'task_edit' task.pk %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'task_list' %}" class="btn btn-secondary">Back to Task List</a>
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

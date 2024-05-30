@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if form.instance.pk %}Edit Task{% else %}Create Task{% endif %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Set a light gray background color */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .form-wrapper {
+            background-color: #ffffff; /* Set a white background color */
+            border: 1px solid #ced4da; /* Add a border */
+            border-radius: 5px; /* Add border radius */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add a shadow */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    {% if messages %}
+    <div class="mt-3">
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <h1 class="mt-4">{% if form.instance.pk %}Edit Task{% else %}Create Task{% endif %}</h1>
+        <div class="form-wrapper">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                <div class="form-group">
+                    {{ form.due_date.label_tag }}
+                    {{ form.due_date }}
+                </div>
+                <div class="form-group">
+                    {{ form.assigned_user.label_tag }}
+                    {{ form.assigned_user }}
+                </div>
+                <div class="form-group">
+                    {{ form.status.label_tag }}
+                    {{ form.status }}
+                </div>
+                <div class="form-group">
+                    {{ form.priority.label_tag }}
+                    {{ form.priority }}
+                </div>
+                <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+            </form>
+            <a href="{% url 'task_list' %}" class="btn btn-secondary mt-3">Back to Task List</a>
+        </div>
+    </div>
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
